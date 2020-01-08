@@ -1,0 +1,5 @@
+export const FRIENDS_FAMILY = "FRIENDS_FAMILY";
+export const RECREATION = "RECREATION";
+export const ORGANISATION = "ORGANISATION";
+export const GEOGRAPHICS = "GEOGRAPHICS";
+export const SOCIALS = "SOCIALS";
