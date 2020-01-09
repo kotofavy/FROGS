@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, TextInput, AsyncStorage } from "react-n
 import Constants from 'expo-constants';
 import shuffle from "shuffle-array";
 
+
 console.log("tafiditra page 1");
 class Page1 extends React.Component {
 
@@ -14,55 +15,44 @@ class Page1 extends React.Component {
       Prenom: '',
       Cat: "",
       Tel: "",
-      Person_data: {}
+      Tab: [],
+    }
+  }
+
+  async componentDidMount() {
+    try {
+      var Item =  await AsyncStorage.getItem('data');
+      if(Item){
+        data = JSON.parse(Item)
+      }else if(Item === null){
+        await AsyncStorage.setItem('data',"[]");
+      }
+    }catch(error){
+      console.log(error)
     }
   }
 
   inputhandler = key => val => {
     if (key === "Nom") {
       this.setState({ [key]: val })
-      console.log(this.state.Nom)
     } else if (key === "Prenom") {
       this.setState({ [key]: val })
-      console.log(this.state.Prenom)
     } else if (key === "Cat") {
       this.setState({ [key]: val })
-      console.log(this.state.Cat)
     } else if (key === "Tel") {
       this.setState({ [key]: val })
-      console.log(this.state.Tel)
-    }
-    else if (key === "Pseudo") {
+    }else if (key === "Pseudo") {
       this.setState({ [key]: val })
-      console.log(this.state.Pseudo)
     }
   };
-  _storeData = async (Person_Data) => {
-    await AsyncStorage.removeItem('data');
-    try {
-      const tab = [];
-      tab.push(Person_Data);
-      //console.log(tab)
-      let Item = await AsyncStorage.getItem('data');
 
-      if (Item) {
-        const Data = JSON.parse(Item);
-        let Data_length = Data.length;
-        while(Data_length >= 0){
-          console.log("while")
-          tab.push(Data[Data_length])
-          Data_length--;
-        }
-        await AsyncStorage.setItem('data', JSON.stringify(tab));
-        console.log(tab)
-      } else if (!Item) {
-        await AsyncStorage.setItem("data", JSON.stringify(tab))
-      }
-      let data = await AsyncStorage.getItem("data")
-      data = JSON.parse(data);
-      setTimeout(() => {
-        console.log(data[0].Nom)
-      }, 1000)
+  _storeData = async (Person_Data) => {
+
+    try {
+      data.push(Person_Data);
+      await AsyncStorage.setItem('data', JSON.stringify(data));
+      const Final_data = JSON.parse(await AsyncStorage.getItem('data'))
+      console.log(Final_data)
     } catch (error) {
       console.log(error)
     }
@@ -70,7 +60,6 @@ class Page1 extends React.Component {
 
   ID_Generator = () => {
     var str = this.state.Pseudo.concat(this.state.Nom.concat(this.state.Prenom), this.state.Cat);
-
     str = str + Math.floor(Math.random() * 100000).toString();
     str = str.split("");
     str = shuffle(str);
@@ -80,9 +69,7 @@ class Page1 extends React.Component {
       str = str.replace(',', '');
       ctr--;
     }
-
     return str;
-
   }
 
   ValidHandler() {
@@ -94,6 +81,7 @@ class Page1 extends React.Component {
       Catégorie: this.state.Cat,
       Tél: this.state.Tel
     }
+
     this._storeData(Person_Data);
     this.props.navigation.navigate("Page2")
   }
@@ -115,6 +103,7 @@ class Page1 extends React.Component {
   }
 }
 
+var data = [];
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
