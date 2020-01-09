@@ -10,7 +10,9 @@ class Page2 extends React.Component {
     data = JSON.parse(data)
     const data_length = data.length;
     while(data_length > 0){
-        if(data[data_length].Catégorie === "Friends/Family")
+        if(data[data_length].Catégorie === "Friends/Family"){
+            
+        }
     }
 
     return data
