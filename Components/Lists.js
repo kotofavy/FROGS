@@ -1,22 +1,24 @@
 import React from 'react';
-import {View, TouchableOpacity, TextInput, StyleSheet} from 'react-native';
+import { View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 
-export default class Lists extends React.Component{
+export default class Lists extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render() {
+        return (
 
-    render(){
-        return(
-            <View style={styles.container}>
-            <TextInput placeholder="search..." style={styles.input}/>
-                <TouchableOpacity>
-                    <View style={styles.texts}>
-                    <Text style={styles.text}>{}</Text>
-                    <Text style={styles.text}></Text>
-                    <Text style={styles.text}></Text>
-                    <Text style={styles.text}></Text>
-                    <Text style={styles.text}></Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styles.container}>
+                <View style={styles.texts}>
+                    <Text style={styles.text}>{this.props.Pseudo}</Text>
+                    <>
+                        <Text>{this.props.Nom}</Text>
+                        <Text>{this.props.Prenom}</Text>
+                        <Text>{this.props.Category}</Text>
+                        <Text>{this.props.Tel}</Text>
+                    </>                    
+                </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
         marginRight: 5,
 
     },
-    text:{
+    text: {
         padding: 5
     },
     texts: {

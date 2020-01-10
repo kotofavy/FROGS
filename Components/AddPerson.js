@@ -55,7 +55,6 @@ class Page1 extends React.Component {
       data.push(Person_Data);
       await AsyncStorage.setItem('data', JSON.stringify(data));
       const Final_data = JSON.parse(await AsyncStorage.getItem('data'))
-      console.log(Final_data)
     } catch (error) {
       console.log(error)
     }
@@ -138,43 +137,3 @@ const styles = StyleSheet.create({
 });
 
 export default Page1;
-
-/*<View style={{ flexDirection: "row" }}>
-  <FlatList
-    data={[{ key: "Timon" }, { key: "Simon" }]}
-    renderItem={({ item }) => (
-      <View style={{ flexDirection: "row" }}>
-        <Text>{item.key}</Text>
-        <Button title="modifier" />
-        <Button title="Supprimer" />
-      </View>
-    )}
-  />
-</View>;*/
-
-/* <ScrollView>
-          <View >
-            <TextInput style={styles.input} placeholder="pseudo" onChangeText={this.inputhandler('Pseudo')} />
-            <TextInput style={styles.input} placeholder="Nom" onChangeText={this.inputhandler('Nom')} />
-            <TextInput style={styles.input} placeholder="Prénom" onChangeText={this.inputhandler('Prenom')} />
-            <TextInput style={styles.input} placeholder="catégorie" onChangeText={this.inputhandler('Cat')} />
-            <TextInput style={styles.input} placeholder="n° Tel..." onChangeText={this.inputhandler('Tel')} />
-            <View style={{ flexDirection: "row" }}>
-              <View style={styles.container2}>
-                <Button
-                  title="Annuler"
-                  onPress={() => this.ValidHandler()}
-                  color="#E56728"
-                />
-            </View>
-              <View style={styles.container2}>
-                <Button
-                color="#28E555"
-                  style={{ width: "50%" }}
-                  title="Ajouter"
-                  onPress={() => this.ValidHandler()}
-                />
-              </View>
-            </View>
-          </View>
-        </ScrollView> */
