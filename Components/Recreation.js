@@ -1,13 +1,14 @@
 import React from "react";
 import {View, Text, Button} from 'react-native';
+import ListPerson from './ListPerson';
 
 class Page3 extends React.Component {
     render(){
         return(
             <View>
-                <Text>Page3</Text>
+                <ListPerson category="Recreations"/>
                 <Button title="Suivant" 
-                        onPress={()=> this.props.navigation.navigate('Page4')}/>
+                        onPress={()=> this.props.navigation.navigate('Organisations')}/>
             </View>
         )
     }

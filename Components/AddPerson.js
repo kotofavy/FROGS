@@ -24,6 +24,7 @@ class Page1 extends React.Component {
 
   async componentDidMount() {
     try {
+      //await AsyncStorage.removeItem('data')
       var Item = await AsyncStorage.getItem('data');
       if (Item) {
         data = JSON.parse(Item)
@@ -85,7 +86,7 @@ class Page1 extends React.Component {
     }
 
     this._storeData(Person_Data);
-    this.props.navigation.navigate("Page2")
+    this.props.navigation.navigate("Home")
   }
 
   render() {
@@ -94,7 +95,7 @@ class Page1 extends React.Component {
         <Input placeholder="Pseudo..." onChangeText={this.inputhandler('Pseudo')} label='Pseudo' errorMessage="Pseudo Trop court"/>
         <Input placeholder="Nom..." onChangeText={this.inputhandler('Nom')} label="Nom"/>
         <Input placeholder="Prenom..." onChangeText={this.inputhandler('Prenom')} label="Prenom"/><Text style={{paddingLeft: 10, fontWeight:"bold", fontSize:16, color: "#889098"}}>Catégorie</Text>
-        <Dropdown data = {[{value: "Friends/Family"},{value:"Recreation"},{value:"Organisation"},{value:"Geographics"},{value:"Socials"}]}  onChangeText={this.inputhandler('Cat')}/>
+        <Dropdown data = {[{value: "Friends/Family"},{value:"Recreations"},{value:"Organisations"},{value:"Geographics"},{value:"Socials"}]}  onChangeText={this.inputhandler('Cat')}/>
         <Input placeholder="n° Tél..." onChangeText={this.inputhandler('Tel')} label="Numéro Téléphone"/>
         <View style={{ paddingTop: 10, flexDirection: "row" }}>
           <View style={{ width: "50%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>

@@ -1,41 +1,56 @@
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import Page1 from './Components/AddPerson';
-import Page2 from './Components/Page2';
-import Page3 from './Components/Page3';
-import Page4 from './Components/Page4';
-import Page5 from './Components/Page5';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import AddPerson from './Components/AddPerson';
+import Friends from './Components/Friends';
+import Recreation from './Components/Recreation';
+import Organisation from './Components/Organisation';
+import Geographics from './Components/Geographics';
+import Socials from './Components/Socials';
 import Home from './Components/Home';
 
 const MainNav = createStackNavigator({
-    Home: {screen: Home,
-           navigationOptions: ({navigation}) => ({
-                title: "Home"
-           })
-    },
-    Page1: {screen: Page1,
-            navigationOptions: ({navigation})=> ({
-                title: "Friends"
-            })},
-    Page2: {screen: Page2,
-            navigationOptions: ({navigation})=> ({
-                title: "Recreations"
-            })},
-    Page3: {screen: Page3,
-            navigationOptions: ({navigation})=> ({
-            title: "Organisation"
-            })
+        Home: {
+                screen: Home,
+                navigationOptions: ({ navigation }) => ({
+                        title: "Home"
+                })
         },
-    Page4: {screen: Page4,
-            navigationOptions: ({navigation})=> ({
-            title: "Geographics"
-            })
-    },
-    Page5: {screen: Page5,
-            navigationOptions: ({navigation})=> ({
-            title: "Socials"
-            })
-    },
+        AddFriend: {
+                screen: AddPerson,
+                navigationOptions: ({ navigation }) => ({
+                        title: "Ajouter Personne"
+                })
+        },
+        Friends: {
+                screen: Friends,
+                navigationOptions: ({ navigation }) => ({
+                        title: "Friends"
+                })
+        },
+        Recreations: {
+                screen: Recreation,
+                navigationOptions: ({ navigation }) => ({
+                        title: "Recreations"
+                })
+        },
+        Organisations: {
+                screen: Organisation,
+                navigationOptions: ({ navigation }) => ({
+                        title: "Organisation"
+                })
+        },
+        Geographics: {
+                screen: Geographics,
+                navigationOptions: ({ navigation }) => ({
+                        title: "Geographics"
+                })
+        },
+        Socials: {
+                screen: Socials,
+                navigationOptions: ({ navigation }) => ({
+                        title: "Socials"
+                })
+        },
 });
 
 const APP = createAppContainer(MainNav);
