@@ -7,6 +7,8 @@ import Organisation from './Components/Organisation';
 import Geographics from './Components/Geographics';
 import Socials from './Components/Socials';
 import Home from './Components/Home';
+import Lists from "./Components/Lists";
+import ListPerson from './Components/ListPerson';
 
 const MainNav = createStackNavigator({
         Home: {
@@ -51,6 +53,12 @@ const MainNav = createStackNavigator({
                         title: "Socials"
                 })
         },
+        Lists: {
+                screen: Lists
+        },
+        ListPerson:{
+                screen: ListPerson
+        }
 });
 
 const APP = createAppContainer(MainNav);

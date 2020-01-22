@@ -5,10 +5,7 @@ import shuffle from "shuffle-array";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { FormLabel, FormInput, FormValidationMessage, Input, Button, Icon } from "react-native-elements";
 import { Dropdown } from 'react-native-material-dropdown';
-
-
-
-console.log("tafiditra page 1");
+import NumericInput from "react-native-numeric-input"
 class Page1 extends React.Component {
 
   constructor(props) {
@@ -19,6 +16,10 @@ class Page1 extends React.Component {
       Prenom: '',
       Cat: "",
       Tel: "",
+      Apt: 0,
+      Rel: 0,
+      Moy: 0,
+      email:""
     }
   }
 
@@ -62,17 +63,8 @@ class Page1 extends React.Component {
   }
 
   ID_Generator = () => {
-    var str = this.state.Pseudo.concat(this.state.Nom.concat(this.state.Prenom), this.state.Cat);
-    str = str + Math.floor(Math.random() * 100000).toString();
-    str = str.split("");
-    str = shuffle(str);
-    str = str.toString();
-    var ctr = str.length
-    while (ctr > 0) {
-      str = str.replace(',', '');
-      ctr--;
-    }
-    return str;
+    var id = Math.floor(Math.random() * 1000000000000000);
+    return id;
   }
 
   ValidHandler() {
@@ -82,7 +74,11 @@ class Page1 extends React.Component {
       Nom: this.state.Nom,
       Prenom: this.state.Prenom,
       Catégorie: this.state.Cat,
-      Tél: this.state.Tel
+      Tél: this.state.Tel,
+      Apt: this.state.Apt,
+      Rel: this.state.Rel,
+      Moy: this.state.Moy,
+      email: this.state.email
     }
 
     this._storeData(Person_Data);
@@ -92,23 +88,37 @@ class Page1 extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Input placeholder="Pseudo..." onChangeText={this.inputhandler('Pseudo')} label='Pseudo' errorMessage="Pseudo Trop court"/>
-        <Input placeholder="Nom..." onChangeText={this.inputhandler('Nom')} label="Nom"/>
-        <Input placeholder="Prenom..." onChangeText={this.inputhandler('Prenom')} label="Prenom"/><Text style={{paddingLeft: 10, fontWeight:"bold", fontSize:16, color: "#889098"}}>Catégorie</Text>
-        <Dropdown data = {[{value: "Friends/Family"},{value:"Recreations"},{value:"Organisations"},{value:"Geographics"},{value:"Socials"}]}  onChangeText={this.inputhandler('Cat')}/>
-        <Input placeholder="n° Tél..." onChangeText={this.inputhandler('Tel')} label="Numéro Téléphone"/>
-        <View style={{ paddingTop: 10, flexDirection: "row" }}>
-          <View style={{ width: "50%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>
-            <TouchableOpacity style={{ alignItems: "center" }} onPress={()=> this.props.navigation.navigate('Home')}>
-              <Text>Annuler</Text><Icon name="cancel" reverse color="#F67A19"/>
-            </TouchableOpacity>
+        <ScrollView>
+          <Input placeholder="Pseudo..." onChangeText={this.inputhandler('Pseudo')} label='Pseudo' errorMessage="Pseudo Trop court" />
+          <Input placeholder="Nom..." onChangeText={this.inputhandler('Nom')} label="Nom" />
+          <Input placeholder="Prenom..." onChangeText={this.inputhandler('Prenom')} label="Prenom" /><Text style={{ paddingLeft: 10, fontWeight: "bold", fontSize: 16, color: "#889098" }}>Catégorie</Text>
+          <Dropdown data={[{ value: "Friends/Family" }, { value: "Recreations" }, { value: "Organisations" }, { value: "Geographics" }, { value: "Socials" }]} onChangeText={this.inputhandler('Cat')} />
+          <Input placeholder="numero téléphone" onChangeText={this.inputhandler('Tel')} label="n° Tél" />
+          <Input placeholder="e-mail..." onChangeText={this.inputhandler('email')} label="n° Tél" label="email"/>
+          <View style={{ flexDirection: "row",paddingTop: 10, PaddingBottom: 5 }}>
+            <View style={{ width: "33%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>
+              <NumericInput type="up-down" minValue = {0} maxValue = {10} onChange = {(value) => {this.setState({Apt: value}); this.setState({Moy: (this.state.Apt+this.state.Rel)/2})}}/><Text>Aptitude</Text>
+            </View>
+            <View style={{ width: "33%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>
+            <NumericInput type="up-down" minValue = {0} maxValue = {10} onChange={(value) => {this.setState({Rel: value}); this.setState({Moy: (this.state.Apt+this.state.Rel)/2})}}/><Text>Relation</Text>
+            </View>
+            <View style={{ width: "34%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>
+            <Text style={{fontSize: 30, fontWeight: "bold"}}>{(this.state.Rel + this.state.Apt)/2}</Text><Text>Moyenne</Text>
+            </View>
           </View>
-          <View style={{ width: "50%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>
-            <TouchableOpacity style={{ alignItems: "center" }}>
-              <Text>Ajouter</Text><Icon name="add" reverse color="#28E555" onPress={()=> this.ValidHandler()}/>
-            </TouchableOpacity>
+          <View style={{ paddingTop: 10, flexDirection: "row", PaddingBottom: 20 }}>
+            <View style={{ width: "50%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>
+              <TouchableOpacity style={{ alignItems: "center" }} onPress={() => this.props.navigation.navigate('Home')}>
+                <Icon name="cancel" reverse color="#F67A19" /><Text>Annuler</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ width: "50%", paddingRight: 5, paddingRight: 5, alignItems: "center" }}>
+              <TouchableOpacity style={{ alignItems: "center" }}>
+                <Icon name="add" reverse color="#28E555" onPress={() => this.ValidHandler()} /><Text>Ajouter</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
     );
   }

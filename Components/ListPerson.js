@@ -17,7 +17,6 @@ export default class ListPerson extends React.Component {
             lists = JSON.parse(lists);
             var list_length = lists.length;
             if (this.props.category === "Friends") {
-                //List_Person = [];
                 while (list_length > 0) {
                     if (lists[list_length - 1].Catégorie === "Friends/Family") {
                         List_Person = [...List_Person, lists[list_length - 1]];
@@ -74,17 +73,22 @@ export default class ListPerson extends React.Component {
 
     render() {
         return (
-            <View>
+            <>
                 {this.state.data.map((item) => (
-                    <TouchableOpacity>
-                        <Text>{item.Pseudo}</Text>
-                        <Text>{item.Nom}</Text>
-                        <Text>{item.Prenom}</Text>
-                        <Text>{item.Catégorie}</Text>
-                        <Text>{item.Tél}</Text>
-                    </TouchableOpacity>
+                        <Lists Pseudo={item.Pseudo}
+                               id={item.id}
+                               Nom={item.Nom}
+                               Prenom={item.Prenom}
+                               Category={item.Catégorie}
+                               Tel={item.Tél}
+                               Apt={item.Apt}
+                               Rel={item.Rel}
+                               Moy={item.Moy}
+                               email={item.email}
+                               route= {this.props.route}
+                        />
                 ))}
-            </View>
+            </>
         )
     }
 }

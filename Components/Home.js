@@ -6,7 +6,7 @@ import Constants from 'expo-constants';
 export default class Home extends React.Component {
     render() {
         return (
-            <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.HomeText}><Icon name="info"></Icon><Text style={{ fontWeight: 'bold' }}>constitution d'une liste suivant la méthode FROGS</Text></View>
                     <View style={styles.container1}>
@@ -22,7 +22,7 @@ export default class Home extends React.Component {
                     </View>
                     <Button onPress={() => this.props.navigation.navigate("AddFriend")} title="add" />
                 </ScrollView>
-            </SafeAreaView>
+            </View>
         )
     }
 }
